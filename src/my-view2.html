@@ -1,0 +1,46 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view2">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+
+    <div class="card">
+      <div class="circle">2</div>
+      <h1>Schedules</h1>
+      <ul>
+        <li><b>Monday 5/29/17</b> Kendra 6-12 Carline 12-10 Guilene 10-6</li>
+        <li><b>Tuesday 5/30/17</b> Kendra 6-2 Bao 2-10 Guilene 10-6</li>
+        <li><b>Wednesday 5/31/17</b> Kendra 6-2 Carline 2-10 Bao 10-6</li>
+        <li><b>Thursday 6/1/17</b> Kendra 6-2 Guilene 2-10 Jessica 10-6</li>
+        <li><b>Friday 6/2/17</b> Carline 6-2 Bao 2-10 Jessica 10-6</li>
+        <li><b>Saturday 6/3/17</b> Carline 6-2 Bao 2-10 Jessica 10-6</li>
+        <li><b>Sunday 6/4/17</b> Carline 6-2 Guilene 2-10 Jessica 10-6</li>
+      </ul>
+    </div>
+  </template>
+
+  <script>
+    class MyView2 extends Polymer.Element {
+      static get is() { return 'my-view2'; }
+    }
+
+    window.customElements.define(MyView2.is, MyView2);
+  </script>
+</dom-module>

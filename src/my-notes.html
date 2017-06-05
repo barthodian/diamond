@@ -13,16 +13,19 @@
 			path="/users/[[user.uid]]/notes"
 			data="{{notes}}">				
 		</firebase-query>
-		<ul>
-			<template is="dom-repeat" items="[[notes]]" as="note">
-				<li>
-					<p>[[note.content]]</p>
-				</li>
-			</template>
-		</ul>
-
-		<paper-input id="input" label="Take a note..."></paper-input>
-		<paper-button id="add" on-tap="add">Post</paper-button>
+		<div id="notes" hidden$="[[!user]]">
+			<ul id="notes-list">
+				<template is="dom-repeat" items="[[notes]]" as="note">
+					<li>
+						<p class="content">[[note.content]]</p>
+					</li>
+				</template>
+			</ul>
+			<paper-input id="input" label="Take a note..."></paper-input>
+			<div id="notes-controls">
+				<paper-button id="add" on-tap="add">Post</paper-button>
+			</div>
+		</div>
 	</template>
 
 	<script>

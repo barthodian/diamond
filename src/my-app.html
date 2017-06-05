@@ -20,6 +20,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="my-login.html">
 <link rel="import" href="my-icons.html">
 
 <link rel="lazy-import" href="my-view1.html">
@@ -67,6 +69,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         font-weight: bold;
       }
     </style>
+    
+    <firebase-app
+      auth-domain="diamond-169406.firebaseapp.com"
+      database-url="https://diamond-169406.firebaseio.com/"
+      api-key="AIzaSyApasNRhS1DffabWrF3Kb9vdSqNIjHLbHk">
+    </firebase-app>
 
     <app-location route="{{route}}"></app-location>
     <app-route
@@ -94,6 +102,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <app-toolbar>
             <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
             <div main-title>Diamond</div>
+            <my-login></my-login>
           </app-toolbar>
         </app-header>
 
@@ -110,6 +119,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </iron-pages>
       </app-header-layout>
     </app-drawer-layout>
+
+
   </template>
 
   <script>

@@ -1,20 +1,56 @@
 <!-- Load the Polymer.Element base class -->
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html"> 
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<link rel="import" href="schedule-app.html">
 
 <dom-module id="my-new-view">
   <!-- Defines the element's style and local DOM -->
   <template>
-    <style>
+    <style is="custom-style" include="iron-flex iron-flex-alignment shared-styles">
       :host {
         display: block;
 
-        padding: 16px;
+        padding: 10px;
       }
     </style>
 
-    <h1>New view</h1>
-    <paper-checkbox>Ready to deploy!
+    <paper-card class="horizontal layout flex">
+      <schedule-app class="flex"></schedule-app>
+    </paper-card>
+
+    <firebase-auth user="{{user}}"></firebase-auth>
+    <firebase-query
+      id="query"
+      path="/users/[[user.uid]]/notes"
+      data="{{notes}}">       
+    </firebase-query>
+    <div id="notes" hidden$="[[!user]]">
+      <ul id="notes-list">
+        <template is="dom-repeat" items="[[notes]]" as="note">
+          <li>
+            <p class="content">[[note.content]]</p>
+          </li>
+        </template>
+      </ul>
+      <paper-input id="input" label="Take a note..."></paper-input>
+      <div id="notes-controls">
+        <paper-button id="add" on-tap="add">Post</paper-button>
+      </div>
+    </div>
+
+
+
   </template>
   <script>
     class MyNewView extends Polymer.Element {

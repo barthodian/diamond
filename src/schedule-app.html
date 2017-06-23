@@ -9,6 +9,8 @@
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-query.html">
 
 
 <link rel="import" href="shared-styles.html">
@@ -36,6 +38,12 @@
       provider="google">
     </firebase-auth>
 
+    <firebase-query
+      id="query"
+      path="/users/[[user.uid]]/settings"
+      data="{{admin}}">       
+    </firebase-query>
+
     <!-- If signed in: -->
     <template is="dom-if" if="[[user]]">
       <app-header-layout>
@@ -48,32 +56,21 @@
         </app-header>
       </app-header-layout>
 
-        <div class="content app-grid horizontal layout">
+        <div class="content app-grid">
           <div class="horizontal layout">
             <div class="card-content flex">
               <h2 id="">{{dateStamp}}</h2>
+              <template is="dom-repeat" items="{{admin}}" as="level">
+                <template is="dom-if" if="[[level.$val]]">
+                  <p>You're admin</p>
+                </template>
+              </template>
             </div>
             <!-- <paper-fab icon="my-icons:add" class="fab-padding end-justified"></paper-fab> -->
           </div>
-          <div class="horizontal layout">
-            <div class="card-content flex">
-              <h3>First Shift - Kendra</h3>
-              <paper-progress class="blue" value="100"></paper-progress>
-            </div>
-          </div>
-          <div class="horizontal layout">
-            <div class="card-content flex">
-              <h3>Second Shift - Carline</h3>
-              <paper-progress class="yellow" value="40"></paper-progress>
-            </div>
-          </div>
-          <div class="horizontal layout">
-            <div class="card-content flex">
-              <h3>Third Shift - Bao</h3>
-              <paper-progress class="red" value="0"></paper-progress>
-            </div>
-          </div>
+
         </div>
+
     <!-- If not signed in: -->
     </template>
     <template is="dom-if" if="[[!user]]">
@@ -98,7 +95,7 @@
     Polymer({
       is: 'schedule-app',
       properties: {
-        notes: {
+        admin: {
           type: Object
         },
         dateStamp: {

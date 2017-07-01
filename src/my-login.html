@@ -1,0 +1,44 @@
+<link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+
+
+<dom-module id="my-login">
+	<template>
+		<firebase-auth
+			id="auth"
+			user="{{user}}"
+			status-known="{{statusKnown}}"
+			provider="google">
+		</firebase-auth>
+
+		<template is="dom-if" if="[[user]]">
+			<paper-button on-tap="logout" hidden$="[[!user]]">[[user.displayName]]</paper-button>
+			<paper-icon-button icon="my-icons:more-vert"></paper-icon-button>
+		</template>
+
+		<paper-button on-tap="login" hidden$="[[user]]">Sign in</paper-button>
+
+	</template>
+	<script>
+	Polymer({
+		is: 'my-login',
+		properties: {
+			user: {
+				type: Object
+			},
+			statusKnown: {
+				type: Object
+			}
+		},
+		login: function() {
+			return this.$.auth.signInWithPopup();
+		},
+		logout: function() {
+			return this.$.auth.signOut();
+		}
+	})
+	</script>
+</dom-module>

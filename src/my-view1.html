@@ -1,16 +1,19 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-view1">
   <template>
-    <style include="shared-styles">
+    <style include="shared-styles iron-flex iron-flex-alignment">
       :host {
         display: block;
 
         padding: 10px;
       }
     </style>
-    <!-- If  -->
+    <!-- If not logged in -->
+    <!-- If logged in but no member -->
+    <!-- If logged in -->
     <div class="card">
       <div class="circle">1</div>
       <h1>Dashboard</h1>

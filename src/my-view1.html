@@ -9,16 +9,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../bower_components/iron-list/iron-list.html">
-<link rel="import" href="../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-view1">
   <template>
-    <style is="custom-style" include="iron-flex iron-flex-alignment shared-styles">
+    <style include="shared-styles">
       :host {
         display: block;
 
@@ -26,43 +21,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
-    <div class="horizontal end-justified layout">
-      <paper-card heading="Dashboard" class="flex">
-
-        <div class="card-content">
-          <!-- <div class="circle">B</div> -->
-
-<!--           <iron-ajax url="data.json" last-response="{{data}}" auto></iron-ajax>
-          <iron-list items="[[data]]" as="item">
-            <template>
-              <div>Name: [[item.name]]</div>
-            </template>
-          </iron-list>
- -->      
-          <div>
-            <h2>Schedule</h2>
-            <ul>
-              <li><b>Monday 5/29/17</b> Kendra 6-12 Carline 12-10 Guilene 10-6</li>
-              <li><b>Tuesday 5/30/17</b> Kendra 6-2 Bao 2-10 Guilene 10-6</li>
-              <li><b>Wednesday 5/31/17</b> Kendra 6-2 Carline 2-10 Bao 10-6</li>
-              <li><b>Thursday 6/1/17</b> Kendra 6-2 Guilene 2-10 Jessica 10-6</li>
-              <li><b>Friday 6/2/17</b> Carline 6-2 Bao 2-10 Jessica 10-6</li>
-              <li><b>Saturday 6/3/17</b> Carline 6-2 Bao 2-10 Jessica 10-6</li>
-              <li><b>Sunday 6/4/17</b> Carline 6-2 Guilene 2-10 Jessica 10-6</li>
-            </ul>
-          </div>
-          <p></p>
-          <p></p>
-          <p></p>
-        </div>
-
-        <div class="card-actions horizontal end-justified layout">
-          <paper-button class="">Got it!</paper-button>
-        </div>
-
-      </paper-card>
+    <div class="card">
+      <div class="circle">1</div>
+      <h1>View One</h1>
+      <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
+      <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
     </div>
-
   </template>
 
   <script>

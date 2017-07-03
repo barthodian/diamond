@@ -1,0 +1,124 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-query.html">
+
+
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="schedule-app">
+  <template>
+    <style  is="custom-style" include="iron-flex iron-flex-alignment shared-styles">
+      :host {
+        --app-grid-columns: 3;
+        --app-grid-item-height: 100px;
+      }
+      h2 {
+        padding: 8px;
+      }
+      .content {
+        padding-bottom: 20px;
+        background-color: var(--paper-grey-50)
+      }
+    </style>
+
+    <firebase-auth
+      id="auth"
+      user="{{user}}"
+      status-known="{{statusKnown}}"
+      provider="google">
+    </firebase-auth>
+
+    <firebase-query
+      id="query"
+      path="/organizations/1/members/[[user.uid]]"
+      data="{{active}}">
+    </firebase-query>
+
+    <!-- If signed in: -->
+    <template is="dom-if" if="[[user]]">
+      <paper-card heading="Schedule" class="horizontal flex" alt="Schedule">
+
+        <!-- If no member at all -->
+        <template is="dom-if" if="[[!active.$key]]">
+          <div class="card-content">
+            <h1 on-click="checkMember1">No access</h1>
+            <p>You need to be added to your organization. Please contact your manager for further assistance.</p>
+          </div>
+          <div class="card-actions">
+            <div class="horizontal end-justified layout">
+              <paper-button class="">Got it!</paper-button>
+            </div>
+          </div>
+        </template>
+
+        <!-- If member -->
+        <template is="dom-if" if="[[active.$key]]">
+          <div class="card-content">
+            <h1 on-click="checkMember1">Access Granted!</h1>
+          </div>
+          <div class="card-actions">
+            <div class="horizontal end-justified layout">
+              <paper-button class="">Got it!</paper-button>
+            </div>
+          </div>
+        </template>
+
+      </paper-card>
+
+      <!-- <div class="content app-grid">
+        <div class="horizontal layout">
+          <div class="card-content flex">
+            <h2 id="">{{dateStamp}}</h2>
+            <template is="dom-repeat" items="{{admin}}" as="level">
+              <template is="dom-if" if="[[level.$val]]">
+                <p>You're admin</p>
+              </template>
+            </template>
+          </div>
+    <paper-fab icon="my-icons:add" class="fab-padding end-justified"></paper-fab>
+        </div>
+
+      </div> -->
+
+    </template>
+
+  </template>
+
+  <script>
+    class scheduleApp extends Polymer.Element {
+      static get is() {return 'schedule-app';}
+
+      static get properties() {
+        return {
+          member: {
+            type: Object,
+            observer: 'dataChanged'
+          },
+          greetings: {
+            type: String,
+            value: "hey there"
+          }
+        }
+
+      }
+
+
+
+      checkMember1() {
+        console.log(this.active)
+      }
+
+    }
+
+    window.customElements.define(scheduleApp.is, scheduleApp);
+
+  </script>
+</dom-module>

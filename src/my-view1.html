@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-view1">
@@ -14,12 +15,11 @@
     <!-- If not logged in -->
     <!-- If logged in but no member -->
     <!-- If logged in -->
-    <div class="card">
-      <div class="circle">1</div>
-      <h1>Dashboard</h1>
-      <p>Shell Okeechobee.</p>
-      <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
-    </div>
+    <paper-card class="layout horizontal wrap">
+      <div class="flex">
+        <h1>Dashboard</h1>
+      </div>
+    </paper-card>
   </template>
 
   <script>

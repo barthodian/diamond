@@ -1,11 +1,22 @@
 <link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
+
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
 
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<link rel="import" href="shared-styles.html">
 
 <dom-module id="my-login">
 	<template>
+		<style  is="custom-style" include="iron-flex iron-flex-alignment shared-styles">
+
+		</style>
+
 		<firebase-auth
 			id="auth"
 			user="{{user}}"
@@ -14,8 +25,21 @@
 		</firebase-auth>
 
 		<template is="dom-if" if="[[user]]">
-			<paper-button on-tap="logout" hidden$="[[!user]]">[[user.displayName]]</paper-button>
-			<paper-icon-button icon="my-icons:more-vert"></paper-icon-button>
+			<!-- <paper-button on-tap="logout" hidden$="[[!user]]">[[user.displayName]]
+			</paper-button> -->
+			<paper-menu-button vertical-align="top" vericalOffset=10 horizontal-align="right">
+				<paper-button hidden$="[[!user]]" slot="dropdown-trigger" alt="menu">
+					[[user.displayName]]
+				</paper-button>
+				<paper-listbox slot="dropdown-content">
+					<paper-item disabled>[[user.displayName]]</paper-item>
+					<paper-item>Dashboard</paper-item>
+					<paper-item>Administrator</paper-item>
+					<paper-item>
+						<paper-button on-tap="logout" hidden$="[[!user]]">Logout</paper-button>
+					</paper-item>
+				</paper-listbox>
+			</paper-menu-button>
 		</template>
 
 		<paper-button on-tap="login" hidden$="[[user]]">Sign in</paper-button>

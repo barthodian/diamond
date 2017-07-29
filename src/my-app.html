@@ -1,17 +1,25 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
+
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+
 <link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
+
 <link rel="import" href="my-icons.html">
 <link rel="import" href="my-login.html">
 
@@ -68,6 +76,19 @@
       api-key="AIzaSyApasNRhS1DffabWrF3Kb9vdSqNIjHLbHk">
     </firebase-app>
 
+    <firebase-auth
+      id="auth"
+      user="{{user}}"
+      status-known="{{statusKnown}}"
+      provider="google">
+    </firebase-auth>
+
+    <firebase-query
+      id="query"
+      path="/organizations/0"
+      data="{{admin}}">
+    </firebase-query>
+
     <app-location route="{{route}}"></app-location>
     <app-route
         route="{{route}}"
@@ -82,6 +103,7 @@
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <a name="view1" href="view1">Dashboard</a>
           <a name="view2" href="view2">Schedule</a>
+          <a name="admin" href="admin" hidden$="[[!bao]]">Administrator</a>
           <!-- <a name="view3" href="view3">View Three</a> -->
         </iron-selector>
       </app-drawer>
@@ -123,10 +145,24 @@
             reflectToAttribute: true,
             observer: '_pageChanged',
           },
+          testage: {
+            type: Boolean,
+            value: function(){false;}
+          },
           rootPattern: String,
           routeData: Object,
           subroute: String,
         };
+      }
+
+      bao() {
+        if (this.admin[0].$val === this.user.uid) {
+          console.log("It's True...");
+          return true;
+        } else {
+          console.log("Na-uhh!");
+          return false;
+        }
       }
 
       static get observers() {
@@ -141,6 +177,7 @@
         // Get root pattern for app-route, for more info about `rootPath` see:
         // https://www.polymer-project.org/2.0/docs/upgrade#urls-in-templates
         this.rootPattern = (new URL(this.rootPath)).pathname;
+
       }
 
       _routePageChanged(page) {

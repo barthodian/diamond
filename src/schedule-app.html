@@ -1,15 +1,20 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
 <link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
 <link rel="import" href="../bower_components/polymerfire/firebase-query.html">
 
+<link rel="import" href="../bower_components/simple-modal/simple-modal.html">
 
 <link rel="import" href="shared-styles.html">
 
@@ -38,8 +43,8 @@
 
     <firebase-query
       id="query"
-      path="/organizations/1/members/[[user.uid]]"
-      data="{{active}}">
+      path="/organizations/d9Ty6/privilege/admin"
+      data="{{priv}}">
     </firebase-query>
 
     <!-- If signed in: -->
@@ -47,7 +52,7 @@
       <paper-card heading="Schedule" class="horizontal flex" alt="Schedule">
 
         <!-- If no member at all -->
-        <template is="dom-if" if="[[!active.$key]]">
+        <template is="dom-if" if="[[priv.admin.$val]]">
           <div class="card-content">
             <h1 on-click="checkMember1">No access</h1>
             <p>You need to be added to your organization. Please contact your manager for further assistance.</p>
@@ -60,7 +65,7 @@
         </template>
 
         <!-- If member -->
-        <template is="dom-if" if="[[active.$key]]">
+        <template is="dom-if" if="[[member.active.$val]]">
           <div class="card-content">
             <h1 on-click="checkMember1">Access Granted!</h1>
           </div>
@@ -98,9 +103,8 @@
 
       static get properties() {
         return {
-          member: {
-            type: Object,
-            observer: 'dataChanged'
+          priv: {
+            type: Object
           },
           greetings: {
             type: String,
@@ -113,7 +117,7 @@
 
 
       checkMember1() {
-        console.log(this.active)
+        console.log(this.priv.$key)
       }
 
     }

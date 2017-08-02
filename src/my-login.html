@@ -24,11 +24,13 @@
 			provider="google">
 		</firebase-auth>
 
+		<!-- If user is not logged in, Sign in button appears -->
+		<paper-button on-tap="login" hidden$="[[user]]">Sign In</paper-button>
+
+		<!-- If user is logged in, render Firstname button -->
 		<template is="dom-if" if="[[user]]">
-			<!-- <paper-button on-tap="logout" hidden$="[[!user]]">[[user.displayName]]
-			</paper-button> -->
 			<paper-menu-button vertical-align="top" vericalOffset=10 horizontal-align="right">
-				<paper-button hidden$="[[!user]]" slot="dropdown-trigger" alt="menu">
+				<paper-button slot="dropdown-trigger" alt="menu">
 					[[user.displayName]]
 				</paper-button>
 				<paper-listbox slot="dropdown-content">
@@ -36,13 +38,11 @@
 					<paper-item>Dashboard</paper-item>
 					<paper-item>Administrator</paper-item>
 					<paper-item>
-						<paper-button on-tap="logout" hidden$="[[!user]]">Logout</paper-button>
+						<paper-button on-tap="logout" hidden$="[[!user]]">Sign Out</paper-button>
 					</paper-item>
 				</paper-listbox>
 			</paper-menu-button>
 		</template>
-
-		<paper-button on-tap="login" hidden$="[[user]]">Sign in</paper-button>
 
 	</template>
 	<script>

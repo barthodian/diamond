@@ -1,23 +1,26 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
-<link rel="import" href="../bower_components/app-layout/app-grid/app-grid-style.html">
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../bower_components/paper-progress/paper-progress.html">
-<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
-<link rel="import" href="../bower_components/paper-item/paper-item.html">
+
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+
 <link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
 <link rel="import" href="../bower_components/polymerfire/firebase-query.html">
 
+<link rel="import" href="../bower_components/simple-modal/simple-modal.html">
 
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="schedule-app">
   <template>
-    <style  is="custom-style" include="iron-flex iron-flex-alignment shared-styles app-grid-style">
+    <style  is="custom-style" include="iron-flex iron-flex-alignment shared-styles">
       :host {
         --app-grid-columns: 3;
         --app-grid-item-height: 100px;
@@ -40,69 +43,86 @@
 
     <firebase-query
       id="query"
-      path="/users/[[user.uid]]/settings"
-      data="{{admin}}">       
+      path="/organizations/d9Ty6/privilege/admin"
+      data="{{priv}}">
     </firebase-query>
 
     <!-- If signed in: -->
     <template is="dom-if" if="[[user]]">
-      <app-header-layout>
-        <app-header>
-          <app-toolbar>
-            <paper-icon-button icon="my-icons:schedule"></paper-icon-button>
-            <div main-title>Schedule</div>
-            <paper-icon-button icon="my-icons:more-vert"></paper-icon-button>
-          </app-toolbar>
-        </app-header>
-      </app-header-layout>
+      <paper-card heading="Schedule" class="horizontal flex" alt="Schedule">
 
-        <div class="content app-grid">
-          <div class="horizontal layout">
-            <div class="card-content flex">
-              <h2 id="">{{dateStamp}}</h2>
-              <template is="dom-repeat" items="{{admin}}" as="level">
-                <template is="dom-if" if="[[level.$val]]">
-                  <p>You're admin</p>
-                </template>
-              </template>
-            </div>
-            <!-- <paper-fab icon="my-icons:add" class="fab-padding end-justified"></paper-fab> -->
+        <!-- If no member at all -->
+        <template is="dom-if" if="[[priv.admin.$val]]">
+          <div class="card-content">
+            <h1 on-click="checkMember1">No access</h1>
+            <p>You need to be added to your organization. Please contact your manager for further assistance.</p>
           </div>
+          <div class="card-actions">
+            <div class="horizontal end-justified layout">
+              <paper-button class="">Got it!</paper-button>
+            </div>
+          </div>
+        </template>
 
+        <!-- If member -->
+        <template is="dom-if" if="[[member.active.$val]]">
+          <div class="card-content">
+            <h1 on-click="checkMember1">Access Granted!</h1>
+          </div>
+          <div class="card-actions">
+            <div class="horizontal end-justified layout">
+              <paper-button class="">Got it!</paper-button>
+            </div>
+          </div>
+        </template>
+
+      </paper-card>
+
+      <!-- <div class="content app-grid">
+        <div class="horizontal layout">
+          <div class="card-content flex">
+            <h2 id="">{{dateStamp}}</h2>
+            <template is="dom-repeat" items="{{admin}}" as="level">
+              <template is="dom-if" if="[[level.$val]]">
+                <p>You're admin</p>
+              </template>
+            </template>
+          </div>
+    <paper-fab icon="my-icons:add" class="fab-padding end-justified"></paper-fab>
         </div>
 
-    <!-- If not signed in: -->
-    </template>
-    <template is="dom-if" if="[[!user]]">
-      <app-header-layout>
-        <app-header>
-          <app-toolbar>
-            <paper-icon-button icon="my-icons:schedule" drawer-toggle></paper-icon-button>
-            <div main-title>Schedule - Login</div>
-          </app-toolbar>
-        </app-header>
-      </app-header-layout>
-      <h1>Login Required</h1>
+      </div> -->
 
     </template>
-
-    
-
 
   </template>
 
   <script>
-    Polymer({
-      is: 'schedule-app',
-      properties: {
-        admin: {
-          type: Object
-        },
-        dateStamp: {
-          type: String,
-          value: new Date().getMonth() + 1 + "/" + new Date().getDate() + "/" + new Date().getFullYear() + " " + new Date().getHours() + ":" + new Date().getMinutes()
+    class scheduleApp extends Polymer.Element {
+      static get is() {return 'schedule-app';}
+
+      static get properties() {
+        return {
+          priv: {
+            type: Object
+          },
+          greetings: {
+            type: String,
+            value: "hey there"
+          }
         }
+
       }
-    });
+
+
+
+      checkMember1() {
+        console.log(this.priv.$key)
+      }
+
+    }
+
+    window.customElements.define(scheduleApp.is, scheduleApp);
+
   </script>
 </dom-module>

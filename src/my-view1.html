@@ -1,68 +1,25 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../bower_components/iron-list/iron-list.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-view1">
   <template>
-    <style is="custom-style" include="iron-flex iron-flex-alignment shared-styles">
+    <style include="shared-styles iron-flex iron-flex-alignment">
       :host {
         display: block;
 
         padding: 10px;
       }
     </style>
-
-    <div class="horizontal end-justified layout">
-      <paper-card heading="Dashboard" class="flex">
-
-        <div class="card-content">
-          <!-- <div class="circle">B</div> -->
-
-<!--           <iron-ajax url="data.json" last-response="{{data}}" auto></iron-ajax>
-          <iron-list items="[[data]]" as="item">
-            <template>
-              <div>Name: [[item.name]]</div>
-            </template>
-          </iron-list>
- -->      
-          <div>
-            <h2>Schedule</h2>
-            <ul>
-              <li><b>Monday 5/29/17</b> Kendra 6-12 Carline 12-10 Guilene 10-6</li>
-              <li><b>Tuesday 5/30/17</b> Kendra 6-2 Bao 2-10 Guilene 10-6</li>
-              <li><b>Wednesday 5/31/17</b> Kendra 6-2 Carline 2-10 Bao 10-6</li>
-              <li><b>Thursday 6/1/17</b> Kendra 6-2 Guilene 2-10 Jessica 10-6</li>
-              <li><b>Friday 6/2/17</b> Carline 6-2 Bao 2-10 Jessica 10-6</li>
-              <li><b>Saturday 6/3/17</b> Carline 6-2 Bao 2-10 Jessica 10-6</li>
-              <li><b>Sunday 6/4/17</b> Carline 6-2 Guilene 2-10 Jessica 10-6</li>
-            </ul>
-          </div>
-          <p></p>
-          <p></p>
-          <p></p>
-        </div>
-
-        <div class="card-actions horizontal end-justified layout">
-          <paper-button class="">Got it!</paper-button>
-        </div>
-
-      </paper-card>
-    </div>
-
+    <!-- If not logged in -->
+    <!-- If logged in but no member -->
+    <!-- If logged in -->
+    <paper-card class="layout horizontal wrap">
+      <div class="flex">
+        <h1>Dashboard</h1>
+      </div>
+    </paper-card>
   </template>
 
   <script>

@@ -9,17 +9,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../bower_components/iron-list/iron-list.html">
-<link rel="import" href="../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="my-notes.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-view3">
   <template>
-    <style is="custom-style" include="iron-flex iron-flex-alignment shared-styles">
+    <style include="shared-styles">
       :host {
         display: block;
 
@@ -27,18 +21,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
-    <div class="horizontal end-justified layout">
-      <paper-card heading="Notes" class="flex">
-
-        <div class="card-content">
-          <my-notes></my-notes>
-        </div>
-
-        <div class="card-actions horizontal end-justified layout">
-          <paper-button class="">Got it!</paper-button>
-        </div>
-
-      </paper-card>
+    <div class="card">
+      <div class="circle">3</div>
+      <h1>View Three</h1>
+      <p>Modus commodo minimum eum te, vero utinam assueverit per eu.</p>
+      <p>Ea duis bonorum nec, falli paulo aliquid ei eum.Has at minim mucius aliquam, est id tempor laoreet.Pro saepe pertinax ei, ad pri animal labores suscipiantur.</p>
     </div>
   </template>
 
